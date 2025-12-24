@@ -3,3 +3,6 @@
 *.exe
 
 /.clang-format
+*/.clang-format
+*.log
+/build/

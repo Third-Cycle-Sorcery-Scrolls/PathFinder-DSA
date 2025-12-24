@@ -1,0 +1,23 @@
+#include "raylib.h"
+#include "core/Constants.h"
+#include "core/Application.h"
+
+int main() {
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "PathFinder DSA - BFS Demo");
+
+    Application app;
+    app.init();
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        app.update();
+        app.render();
+
+        EndDrawing();
+    }
+
+    CloseWindow();
+    return 0;
+}
