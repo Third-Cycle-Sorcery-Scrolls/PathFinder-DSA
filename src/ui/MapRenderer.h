@@ -6,12 +6,15 @@
 
 class MapRenderer {
 public:
-    void draw(
-        const Graph& graph,
-        int hoveredNode,
-        const PathResult& bfsResult,
-        size_t bfsStep,
-        int startNode,
-        int endNode
-    );
+   void draw(
+    const Graph& graph,
+    int hoveredNode,
+    const PathResult& result,
+    size_t animationStep,
+    int startNode,
+    int endNode,
+    size_t pathStep,
+    bool pathAnimating
+);
+
 };
