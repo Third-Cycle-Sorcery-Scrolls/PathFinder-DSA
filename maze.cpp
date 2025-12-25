@@ -44,6 +44,9 @@ std::priority_queue<PQElement, std::vector<PQElement>, std::greater<PQElement>> 
 
 bool algorithmRunning = false;
 bool pathFound = false;
+bool statsComputed = false; // avoid recomputing overlay stats every frame
+int visitedCount = 0;
+int pathLengthDisplay = 0;
 
 // --- INITIALIZATION ---
 void InitGrid() {
@@ -71,6 +74,23 @@ void InitGrid() {
 
     algorithmRunning = false;
     pathFound = false;
+    statsComputed = false;
+    visitedCount = 0;
+    pathLengthDisplay = 0;
+}
+
+int ComputePathLength() {
+    int length = 1; // Start with 1 to include the end node
+    Node *curr = endNode;
+
+    // Count nodes in path from end back to start via parent links
+    while (curr != nullptr && curr != startNode) {
+        if (curr->parent == nullptr)
+            break;
+        length++;
+        curr = curr->parent;
+    }
+    return length;
 }
 
 // --- DIJKSTRA STEP (Graph Traversal) ---
@@ -82,16 +102,21 @@ void UpdateDijkstra() {
     // 1. Get the node with the smallest distance
     Node *current = pq.top().second;
     pq.pop();
+    
+     if (current->visited)
+        return; // Skip if already processed
+    current->visited = true;
+    visitedCount++;
 
     // If we reached the end, stop
     if (current == endNode) {
         pathFound = true;
+        if (!statsComputed) {
+            pathLengthDisplay = ComputePathLength();
+            statsComputed = true;
+        }
         return;
     }
-
-    if (current->visited)
-        return; // Skip if already processed
-    current->visited = true;
 
     // 2. Check Edges (Neighbors: Up, Down, Left, Right)
     int dx[] = {0, 0, 1, -1};
@@ -204,6 +229,10 @@ int main() {
         }
 
         DrawFPS(10, 10);
+        if (pathFound) {
+            DrawText(TextFormat("Path length: %d", pathLengthDisplay), 10, 35, 20, DARKGREEN);
+            DrawText(TextFormat("Visited: %d", visitedCount), 10, 60, 20, DARKBLUE);
+        }
         if (!algorithmRunning)
             DrawText("Draw Walls with Mouse. SPACE to Start. R to Reset", 10, SCREEN_HEIGHT - 30, 20, DARKGRAY);
 
