@@ -1,13 +1,14 @@
 #pragma once
 #include "graph/Graph.h"
 #include "PathResult.h"
-#include "PathAlgorithm.h"
 
-class DFS:public PathAlgorithm {
+class PathAlgorithm {
 public:
-     PathResult run(
+    virtual ~PathAlgorithm() = default;
+
+    virtual PathResult run(
         const Graph& graph,
         int start,
         int end
-    ) override;
+    ) = 0;
 };

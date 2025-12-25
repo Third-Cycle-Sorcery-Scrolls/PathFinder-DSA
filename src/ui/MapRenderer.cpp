@@ -2,15 +2,15 @@
 #include "raylib.h"
 #include "core/Constants.h"
 
-#include <algorithm> // std::find
-
 void MapRenderer::draw(
     const Graph& graph,
     int hoveredNode,
-    const PathResult& bfsResult,
+    const PathResult& result,
     size_t bfsStep,
     int startNode,
-    int endNode
+    int endNode,
+    size_t pathStep,
+    bool pathAnimating
 ) {
     /* -------------------- DRAW EDGES -------------------- */
     for (int i = 0; i < (int)graph.nodes.size(); ++i) {
@@ -28,44 +28,54 @@ void MapRenderer::draw(
 
         /* -------- COLOR PRIORITY (TOP → BOTTOM) -------- */
 
-        //  Final path (highest priority)
-        if (!bfsResult.path.empty() &&
-            std::find(bfsResult.path.begin(),
-                      bfsResult.path.end(),
-                      node.id) != bfsResult.path.end()) {
-            color = ORANGE;
-        }
-        //  Start & End nodes
-        else if (node.id == startNode) {
+        // Start node
+        if (node.id == startNode) {
             color = GREEN;
         }
+        // End node
         else if (node.id == endNode) {
             color = RED;
         }
-        // Animated BFS visited nodes
+        // Animated path (only show up to pathStep)
+        else if (pathAnimating) {
+            for (size_t i = 0; i < pathStep && i < result.path.size(); ++i) {
+                if (result.path[i] == node.id) {
+                    color = ORANGE;
+                    break;
+                }
+            }
+        }
+        // Animated visited nodes
         else {
-            for (size_t i = 0; i < bfsStep && i < bfsResult.visitedOrder.size(); ++i) {
-                if (bfsResult.visitedOrder[i] == node.id) {
+            for (size_t i = 0;
+                 i < bfsStep && i < result.visitedOrder.size();
+                 ++i) {
+                if (result.visitedOrder[i] == node.id) {
                     color = YELLOW;
                     break;
                 }
             }
         }
 
-        // Hover highlight (visual aid)
+        // 5️⃣ Hover highlight (always visible)
         if (node.id == hoveredNode) {
             color = PINK;
         }
 
-        /* -------------------- RENDER -------------------- */
+        /* -------------------- RENDER NODE -------------------- */
         DrawCircleV(node.position, NODE_RADIUS, color);
 
+        /* -------------------- DRAW LABEL -------------------- */
+        const char* label = node.label.c_str();
+        int fontSize = 18;
+        int textWidth = MeasureText(label, fontSize);
+
         DrawText(
-            TextFormat("%d", node.id),
-            node.position.x - 6,
-            node.position.y - 6,
-            12,
-            WHITE
+            label,
+            node.position.x - textWidth / 2,
+            node.position.y - fontSize / 2,
+            fontSize,
+            BLACK
         );
     }
 }

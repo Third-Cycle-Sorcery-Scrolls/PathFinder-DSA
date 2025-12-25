@@ -3,7 +3,8 @@
 #include <vector>
 #include <algorithm>
 
-PathResult DFS::findPath(const Graph& graph, int start, int goal) {
+PathResult DFS::run(const Graph& graph, int start, int end) {
+    int goal = end;
     PathResult result;
 
     int n = graph.nodes.size();

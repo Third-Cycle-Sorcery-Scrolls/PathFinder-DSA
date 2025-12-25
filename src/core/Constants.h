@@ -1,7 +1,7 @@
 #pragma once
 
-constexpr int WINDOW_WIDTH  = 1200;
-constexpr int WINDOW_HEIGHT = 800;
+constexpr int WINDOW_WIDTH  = 1400;
+constexpr int WINDOW_HEIGHT = 900;
 
-constexpr float NODE_RADIUS = 10.0f;
-constexpr float EDGE_THICKNESS = 2.0f;
+constexpr float NODE_RADIUS = 40.0f;
+constexpr float EDGE_THICKNESS = 6.0f;
