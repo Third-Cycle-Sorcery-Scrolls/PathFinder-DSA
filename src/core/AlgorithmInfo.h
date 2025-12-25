@@ -5,3 +5,4 @@ struct AlgorithmInfo {
     AlgorithmType type;
     const char* name;
 };
+
