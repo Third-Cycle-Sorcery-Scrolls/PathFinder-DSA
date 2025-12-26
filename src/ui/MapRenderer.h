@@ -1,7 +1,7 @@
 #pragma once
 
-#include "graph/Graph.h"
-#include "algorithms/PathResult.h"
+#include "../graph/Graph.h"
+#include "../algorithms/PathResult.h"
 #include <cstddef> // for size_t
 
 class MapRenderer {

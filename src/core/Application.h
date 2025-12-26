@@ -1,7 +1,9 @@
-#pragma once
-#include "graph/Graph.h"
-#include "ui/MapRenderer.h"
-#include "algorithms/BFS.h"
+// #pragma once
+// #include "../graph/Graph.h"
+#include "../graph/Graph.h"
+#include "../ui/MapRenderer.h"
+// #include "ui/MapRenderer.h"
+#include "../algorithms/BFS.h"
 
 class Application {
 public:

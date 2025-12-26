@@ -1,5 +1,5 @@
 #pragma once
-#include "graph/Graph.h"
+#include "../graph/Graph.h"
 #include "PathResult.h"
 
 class BFS {
