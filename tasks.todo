@@ -1,0 +1,4 @@
+#TODO: make the final path more visible by increasing its thickness and changing its color to gold. #ongoing
+#TODO: change the maprenderer and application files to display result for all algorithms, not just BFS.
+#TODO: add options to select different algorithms (DFS, Dijkstra, A*) from the UI.
+#TODO: implement a reset button to clear the current path and selections.

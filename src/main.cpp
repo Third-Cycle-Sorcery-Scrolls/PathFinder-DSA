@@ -5,14 +5,13 @@
 
 int main() {
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "PathFinder DSA - BFS Demo");
-
+    SetTargetFPS(2);// Set desired framerate
     Application app;
     app.init();
 
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-
         app.update();
         app.render();
 
