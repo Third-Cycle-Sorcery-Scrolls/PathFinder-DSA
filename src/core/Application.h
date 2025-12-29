@@ -1,7 +1,10 @@
 #pragma once
 #include "graph/Graph.h"
 #include "ui/MapRenderer.h"
-#include "algorithms/BFS.h"
+// #include "algorithms/BFS.h"
+// #include "algorithms/AStar.h"
+// #include "algorithms/DFS.h"
+// #include "algorithms/Dijkstra.h"
 #include "AlgorithmType.h"
 #include "algorithms/PathAlgorithm.h"
 #include "algorithms/PathResult.h"

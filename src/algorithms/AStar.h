@@ -1,10 +1,11 @@
 #pragma once
 #include "../graph/Graph.h"
 #include "PathResult.h"
+#include "PathAlgorithm.h"
 
-class AStar {
+class AStar : public PathAlgorithm {
 public:
-    static PathResult run(const Graph& graph, int start, int end);
+    PathResult run(const Graph& graph, int start, int end) override;
 private:
     static float heuristic(const Graph& graph, int a, int b);
 };
